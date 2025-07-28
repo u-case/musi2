@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: white; /* Default text color for body, typically used for elements directly on background images (e.g., nav buttons) */
+    overflow: hidden; /* Hide scrollbars if content overflows */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Keeps content horizontally centered for pages not overriding this */
+    align-items: center; /* Default: centers content vertically for pages not overriding this */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    text-align: center;
+    background-size: cover; /* Default: Cover the entire background area for pages using background2.jpg */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-color: #333; /* Fallback color for background, useful if 'contain' leaves empty space */
+    position: relative; /* Make body a positioning context (still useful for nav buttons) */
+}
+
+/* Specific rule for halo-page to show the full background image */
+body.halo-page {
+    background-image: url('../images/background1.jpg');
+    background-size: contain;
+    /* TWEAKED: Use flexbox directly on the body for precise positioning of H1 */
+    display: flex; /* Make the body a flex container */
+    flex-direction: column; /* Stack items vertically (H1, then nav buttons) */
+    justify-content: flex-start; /* Push content to the top */
+    align-items: center; /* Center content horizontally */
+}
+
+/* These pages will continue to use background2.jpg with background-size: cover (from the general body rule) */
+body.message-page,
+body.photo-page {
+    background-image: url('../images/background2.jpg');
+}
+
+/* Specific background for the last page */
+body.last-page {
+    background-image: url('../images/background3.jpg'); /* Use your new image here */
+    background-size: cover; /* This will make the image fill the screen. Change to 'contain' if you want the full image visible with potential empty space. */
+    background-position: center;
+}
+
+.page-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Increased opacity for default text boxes (Message Page, Photo Pages) */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 900px; /* Limit content width */
+    width: 90%; /* Responsive width */
+    box-sizing: border-box; /* Include padding in width */
+    color: #212F3D; /* Darker text color for content box */
+    position: relative; /* For z-index if needed */
+    z-index: 1; /* Ensure content is above background but below navigation */
+}
+
+/* REMOVED: Override for the Halo page's content box (as H1 is no longer inside it on index.html) */
+/* body.halo-page .page-content { ... } */
+
+
+/* Reinstated and adjusted: Override for the Last page's content box (less opaque) */
+body.last-page .page-content {
+    background-color: rgba(255, 255, 255, 0.6); /* Increased opacity for the last page's text box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Keep the shadow for depth */
+    color: #212F3D; /* Set text color to darker for better contrast */
+}
+
+/* TWEAKED: Styling for the HALOOOO! text on the index page */
+body.halo-page h1 {
+    font-size: 60px;
+    color: #FF6F61;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-top: 50px; /* Added: Pushes H1 down from the very top of the screen */
+    margin-bottom: 0; /* Ensures no extra space below it */
+    padding: 0; /* Remove any default padding */
+    z-index: 100; /* Ensure it's above other elements */
+}
+
+/* General h1 styling (applies to all H1s, including the one on index.html, unless overridden) */
+h1 {
+    font-size: 60px;
+    color: #FF6F61;
+    margin-bottom: 50px; /* This margin still applies to H1s on other pages */
+}
+
+
+h2 {
+    font-size: 48px;
+    color: #6A0572; /* Original color (remains unchanged) */
+    margin-bottom: 30px;
+}
+
+/* Photo Display container and image styling */
+.photo-display {
+    width: 100%; /* Take full width of its parent (.page-content) */
+    max-width: 800px; /* Max width for the photo container */
+    height: auto; /* Allow height to adjust naturally based on content */
+    max-height: 600px; /* Optional: set a maximum height for the photo container */
+    display: flex; /* Use flexbox to center the image within this container */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Center the container on the page */
+    border-radius: 10px;
+    /* Uncomment for debugging to see the photo container box: */
+    /* background-color: rgba(0, 0, 0, 0.1); */
+}
+
+.photo-display img {
+    max-width: 100%;  /* Ensures image never exceeds container width */
+    max-height: 100%; /* Ensures image never exceeds container height */
+    object-fit: contain; /* Scales the image down to fit completely within the container, preserving aspect ratio */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Personal Message Styling (for message.html) */
+.personal-message-visible {
+    font-size: 16px;
+    font-style: italic;
+    color: #212F3D;
+    white-space: pre-wrap; /* Preserves line breaks from \n */
+    line-height: 1.6;
+    margin-top: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center; /* Center the text within the message box */
+}
+
+
+/* Navigation Buttons */
+.navigation-buttons {
+    position: absolute; /* Position relative to the body */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 10; /* Ensure buttons are on top of other content */
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%; /* Make them circular */
+    transition: background-color 0.3s ease;
+    display: flex; /* Use flex to center image if needed */
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-button img {
+    width: 50px; /* Arrow size */
+    height: 50px;
+    vertical-align: middle;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-button.left-arrow {
+    margin-right: auto; /* Push left arrow to the left */
+}
+
+.nav-button.right-arrow {
+    margin-left: auto; /* Push right arrow to the right */
+}
+
+.exit-message {
+    margin-top: 30px;
+    color: #212F3D; /* For the "Close Album" message on the last page */
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    /* Adjusted H1 for smaller screens */
+    body.halo-page h1 {
+        font-size: 40px; /* Adjusted to general H1 size */
+        margin-top: 30px; /* Smaller top margin for tablets */
+    }
+    h1 { /* General H1, if any other pages use H1 */
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .nav-button img {
+        width: 40px;
+        height: 40px;
+    }
+    .page-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjusted H1 for very small screens */
+    body.halo-page h1 {
+        font-size: 30px; /* Adjusted to general H1 size */
+        margin-top: 20px; /* Even smaller top margin for mobiles */
+    }
+    h1 { /* General H1, if any other pages use H1 */
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    .personal-message-visible {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .nav-button img {
+        width: 30px;
+        height: 30px;
+    }
+    .navigation-buttons {
+        padding: 0 10px;
+    }
+}
